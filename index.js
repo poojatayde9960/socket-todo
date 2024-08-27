@@ -1,13 +1,15 @@
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
+const { app, httpServer } = require("./socket/socket")
 require("dotenv").config()
-const app = express()
+// const app = express()
 
 
 
 // Setp1 middleware
 app.use(express.json())
+app.use(express.static("dist"))
 app.use(cors({ origin: true, credentials: true }))
 
 // step2 routes
@@ -27,6 +29,6 @@ mongoose.connect(process.env.MONGO_URL)
 
 mongoose.connection.once("open", () => {
     console.log("MONGO CONNECTED");
-    app.listen(process.env.PORT, console.log("SERVER RUNNING"))
+    httpServer.listen(process.env.PORT, console.log("SERVER RUNNING"))
 
 })
