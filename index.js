@@ -3,6 +3,7 @@ const cors = require("cors")
 const mongoose = require("mongoose")
 const { app, httpServer } = require("./socket/socket")
 require("dotenv").config()
+const path = require("path")
 // const app = express()
 
 
@@ -14,9 +15,12 @@ app.use(cors({ origin: true, credentials: true }))
 
 // step2 routes
 app.use("/api/notes", require("./routes/todo.routes"))
+
 // tep 3 404 routes
 app.use("*", (req, res) => {
-    res.status(404).json({ message: "resource not found 404" })
+    
+    res.status(404).json(__dirname, "dist", "index.html")
+    // res.status(404).json({ message: "resource not found 404" })
 })
 // tep 4 error handler
 app.use((err, req, res, next) => {
