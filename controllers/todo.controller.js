@@ -13,7 +13,7 @@ exports.readTodo = asyncHandler(async (req, res) => {
     res.json({ message: "readTodo success", result })
 })
 exports.updateTodo = asyncHandler(async (req, res) => {
-    const result = await Todo.findByIdAndUpdate(req.params._id, req.body)
+    const result = await Todo.findByIdAndUpdate(req.params.id, req.body)
     res.json({ message: "updateTodo success" })
 })
 exports.deleteTodo = asyncHandler(async (req, res) => {
